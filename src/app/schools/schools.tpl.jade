@@ -1,0 +1,17 @@
+div
+  h1
+    | Escuelas
+
+.body
+  table
+    thead
+      td
+        | Escuela
+      td
+        | Ciudad
+    tbody
+      tr(ng-repeat="school in schools")
+        td
+          | {{school.name}}
+        td
+          | {{school.www}}
