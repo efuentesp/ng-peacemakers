@@ -1,6 +1,6 @@
 angular.module( 'ngPeacemakers.about', [
   'ui.state',
-  'placeholders',
+  //'placeholders',
   'ui.bootstrap'
 ])
 

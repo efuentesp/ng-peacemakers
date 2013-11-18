@@ -15,8 +15,6 @@ angular.module( 'ngPeacemakers.schools', [
 
 .controller 'SchoolsCtrl', ( $scope, SchoolsRes ) ->
   $scope.schools = SchoolsRes.query()
-  console.log "Response >>>"
-  console.log $scope.schools
 
 .factory 'SchoolsRes', ( $resource ) ->
   $resource 'http://localhost:3000/api/schools'

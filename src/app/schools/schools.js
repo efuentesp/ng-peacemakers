@@ -13,9 +13,7 @@ angular.module('ngPeacemakers.schools', ['ui.state', 'ngResource']).config(funct
     }
   });
 }).controller('SchoolsCtrl', function($scope, SchoolsRes) {
-  $scope.schools = SchoolsRes.query();
-  console.log("Response >>>");
-  return console.log($scope.schools);
+  return $scope.schools = SchoolsRes.query();
 }).factory('SchoolsRes', function($resource) {
   return $resource('http://localhost:3000/api/schools');
 });
