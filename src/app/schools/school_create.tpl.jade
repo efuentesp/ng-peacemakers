@@ -8,12 +8,12 @@
       label.control-label(for="name")
         | Nombre
       .controls
-        input(type="text", id="name", ng-model="school.name", placeholder="Nombre de la Escuela")
+        input.input-xlarge(type="text", id="name", ng-model="school.name", required=true, placeholder="Nombre de la Escuela")
     .control-group
       label.control-label(for="www")
         | www
       .controls
-        input(type="url", id="www", ng-model="school.www", placeholder="Dirección de Internet")
+        input.input-xlarge(type="url", id="www", ng-model="school.www", placeholder="Dirección de Internet")
 
 .modal-footer
   button.btn(ng-click="cancel()")

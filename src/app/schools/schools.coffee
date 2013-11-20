@@ -61,8 +61,11 @@ angular.module( 'ngPeacemakers.schools', [
   $scope.school = school
 
   $scope.submit = ->
-    $scope.school.$save (data) ->
-      dialog.close($scope.school)
+    $scope.school.$save {},
+      (data) ->
+        dialog.close($scope.school)
+      (response) ->
+        console.log response.data
 
   $scope.cancel = ->
     dialog.close 'cancel'

@@ -69,8 +69,10 @@ angular.module('ngPeacemakers.schools', ['ui.state', 'ngResource']).config(funct
 }).controller('SchoolCreateCtrl', function($scope, SchoolsRes, dialog, school) {
   $scope.school = school;
   $scope.submit = function() {
-    return $scope.school.$save(function(data) {
+    return $scope.school.$save({}, function(data) {
       return dialog.close($scope.school);
+    }, function(response) {
+      return console.log(response.data);
     });
   };
   return $scope.cancel = function() {
