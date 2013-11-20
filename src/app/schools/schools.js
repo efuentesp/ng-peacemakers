@@ -9,11 +9,99 @@ angular.module('ngPeacemakers.schools', ['ui.state', 'ngResource']).config(funct
       }
     },
     data: {
-      pageTitle: 'Schools'
+      pageTitle: 'Escuelas'
     }
   });
-}).controller('SchoolsCtrl', function($scope, SchoolsRes) {
-  return $scope.schools = SchoolsRes.query();
+}).controller('SchoolsCtrl', function($scope, SchoolsRes, $dialog) {
+  $scope.schools = SchoolsRes.query();
+  $scope.createSchool = function(school) {
+    $scope.myDialog = $dialog.dialog({
+      keyboard: true,
+      dialogFade: true,
+      backdropClick: false,
+      resolve: {
+        school: function() {
+          return new SchoolsRes();
+        }
+      }
+    });
+    return $scope.myDialog.open('schools/school_create.tpl.html', 'SchoolCreateCtrl').then(function(result) {
+      if (result !== 'cancel') {
+        return $scope.schools = SchoolsRes.query();
+      }
+    });
+  };
+  $scope.editSchool = function(school) {
+    $scope.myDialog = $dialog.dialog({
+      keyboard: true,
+      dialogFade: true,
+      backdropClick: false,
+      resolve: {
+        school: function() {
+          return angular.copy(school);
+        }
+      }
+    });
+    return $scope.myDialog.open('schools/school_edit.tpl.html', 'SchoolEditCtrl').then(function(result) {
+      if (result !== 'cancel') {
+        return $scope.schools = SchoolsRes.query();
+      }
+    });
+  };
+  return $scope.deleteSchool = function(school) {
+    console.log(school);
+    $scope.myDialog = $dialog.dialog({
+      keyboard: true,
+      dialogFade: true,
+      backdropClick: false,
+      resolve: {
+        school: function() {
+          return angular.copy(school);
+        }
+      }
+    });
+    return $scope.myDialog.open('schools/school_delete.tpl.html', 'SchoolDeleteCtrl').then(function(result) {
+      if (result !== 'cancel') {
+        return $scope.schools = SchoolsRes.query();
+      }
+    });
+  };
+}).controller('SchoolCreateCtrl', function($scope, SchoolsRes, dialog, school) {
+  $scope.school = school;
+  $scope.submit = function() {
+    return $scope.school.$save(function(data) {
+      return dialog.close($scope.school);
+    });
+  };
+  return $scope.cancel = function() {
+    return dialog.close('cancel');
+  };
+}).controller('SchoolEditCtrl', function($scope, SchoolsRes, dialog, school) {
+  $scope.school = school;
+  $scope.submit = function() {
+    return $scope.school.$update(function(data) {
+      return dialog.close($scope.school);
+    });
+  };
+  return $scope.cancel = function() {
+    return dialog.close('cancel');
+  };
+}).controller('SchoolDeleteCtrl', function($scope, SchoolsRes, dialog, school) {
+  $scope.school = school;
+  $scope.submit = function() {
+    return $scope.school.$remove(function(data) {
+      return dialog.close($scope.school);
+    });
+  };
+  return $scope.cancel = function() {
+    return dialog.close('cancel');
+  };
 }).factory('SchoolsRes', function($resource) {
-  return $resource('http://localhost:3000/api/schools');
+  return $resource('http://localhost:3000/api/schools/:id', {
+    id: '@_id'
+  }, {
+    'update': {
+      method: 'PUT'
+    }
+  });
 });

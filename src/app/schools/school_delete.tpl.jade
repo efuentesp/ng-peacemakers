@@ -1,0 +1,25 @@
+.modal-header
+  h3
+    | Eliminar Escuela
+
+.modal-body
+  form.form-horizontal
+    .control-group
+      label.control-label(for="name")
+        | Nombre
+      .controls
+        span.uneditable-input(id="name")
+          | {{school.name}}
+    .control-group
+      label.control-label(for="www")
+        | www
+      .controls
+        span.uneditable-input(id="www")
+          | {{school.www}}
+
+.modal-footer
+  button.btn(ng-click="cancel()")
+    | Cerrar
+  button.btn.btn-danger(ng-click="submit()")
+    i.icon-trash.icon-white
+    |  Eliminar

@@ -1,17 +1,41 @@
-div
-  h1
-    | Escuelas
+div.row-fluid
 
-.body
-  .table
-    thead
-      td
-        | Escuela
-      td
-        | Ciudad
-    tbody
-      tr(ng-repeat="school in schools")
+  .modal-header
+    span
+      h1
+        small
+          i.icon-bell
+          |  Escuelas
+
+  .modal-body
+    div
+      .span10
+        span
+          .input-prepend
+            span
+              .add-on
+              i.icon-search
+            input.input-xlarge.normal(type="text", ng-model="querySchool", placeholder="Buscar...")
+      .span2
+        span
+          button.btn.btn-primary(id="createBtn", type="button", ng-click="createSchool(school)", tooltip="Agregar nueva Escuela")
+            i.icon-plus.icon-white
+
+    table.table
+      thead
         td
-          | {{school.name}}
+          | Escuela
         td
-          | {{school.www}}
+          | Ciudad
+        td
+      tbody
+        tr(ng-repeat="school in schools | filter: querySchool | orderBy: 'name'")
+          td
+            | {{school.name}}
+          td
+            | {{school.www}}
+          td
+            button.btn.btn-success(id="editBtn", type="button", ng-click="editSchool(school)")
+              i.icon-pencil.icon-white
+            button.btn.btn-danger(id="deleteBtn", type="button", ng-click="deleteSchool(school)")
+              i.icon-trash.icon-white

@@ -1,18 +1,33 @@
 
-<div>
-  <h1>Escuelas</h1>
-</div>
-<div class="body">
-  <table class="table">
-    <thead>
-      <td>Escuela</td>
-      <td>Ciudad</td>
-    </thead>
-    <tbody>
-      <tr ng-repeat="school in schools">
-        <td>{{school.name}}</td>
-        <td>{{school.www}}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="row-fluid">
+  <div class="modal-header"><span>
+      <h1><small><i class="icon-bell"></i> Escuelas</small></h1></span></div>
+  <div class="modal-body">
+    <div>
+      <div class="span10"><span>
+          <div class="input-prepend"><span>
+              <div class="add-on"></div><i class="icon-search"></i></span>
+            <input type="text" ng-model="querySchool" placeholder="Buscar..." class="input-xlarge normal"/>
+          </div></span></div>
+      <div class="span2"><span>
+          <button id="createBtn" type="button" ng-click="createSchool(school)" tooltip="Agregar nueva Escuela" class="btn btn-primary"><i class="icon-plus icon-white"></i></button></span></div>
+    </div>
+    <table class="table">
+      <thead>
+        <td>Escuela</td>
+        <td>Ciudad</td>
+        <td></td>
+      </thead>
+      <tbody>
+        <tr ng-repeat="school in schools | filter: querySchool | orderBy: 'name'">
+          <td>{{school.name}}</td>
+          <td>{{school.www}}</td>
+          <td>
+            <button id="editBtn" type="button" ng-click="editSchool(school)" class="btn btn-success"><i class="icon-pencil icon-white"></i></button>
+            <button id="deleteBtn" type="button" ng-click="deleteSchool(school)" class="btn btn-danger"><i class="icon-trash icon-white"></i></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

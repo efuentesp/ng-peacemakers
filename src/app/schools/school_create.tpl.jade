@@ -1,0 +1,23 @@
+.modal-header
+  h3
+    | Crear Escuela
+
+.modal-body
+  form.form-horizontal
+    .control-group
+      label.control-label(for="name")
+        | Nombre
+      .controls
+        input(type="text", id="name", ng-model="school.name", placeholder="Nombre de la Escuela")
+    .control-group
+      label.control-label(for="www")
+        | www
+      .controls
+        input(type="url", id="www", ng-model="school.www", placeholder="Dirección de Internet")
+
+.modal-footer
+  button.btn(ng-click="cancel()")
+    | Cerrar
+  button.btn.btn-primary(ng-click="submit()")
+    i.icon-ok.icon-white
+    |  Guardar
