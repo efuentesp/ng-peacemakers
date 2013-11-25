@@ -3,7 +3,7 @@
     | Editar Escuela
 
 .modal-body
-  form.form-horizontal
+  form.form-horizontal(name="editForm", novalidate=true)
     .control-group
       label.control-label(for="name")
         | Nombre
@@ -18,6 +18,6 @@
 .modal-footer
   button.btn(ng-click="cancel()")
     | Cerrar
-  button.btn.btn-success(ng-click="submit()")
+  button.btn.btn-success(ng-click="submit()", ng-disabled="editForm.$invalid")
     i.icon-ok.icon-white
     |  Guardar

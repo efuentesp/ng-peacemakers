@@ -70,8 +70,10 @@ angular.module('ngPeacemakers.schools', ['ui.state', 'ngResource']).config(funct
   $scope.school = school;
   $scope.submit = function() {
     return $scope.school.$save({}, function(data) {
+      console.log(data);
       return dialog.close($scope.school);
     }, function(response) {
+      console.log("Error!!!");
       return console.log(response.data);
     });
   };
